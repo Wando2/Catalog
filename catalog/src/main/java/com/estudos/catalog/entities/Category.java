@@ -1,14 +1,16 @@
 package com.estudos.catalog.entities;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_category")
 public class Category {
 
-    public Category(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
@@ -25,6 +27,14 @@ public class Category {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category() {
+    }
+
+    public Category(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
