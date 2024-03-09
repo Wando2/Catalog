@@ -1,8 +1,14 @@
-package Entities;
+package com.estudos.catalog.entities;
 
 import java.util.Objects;
 
 public class Category {
+
+    public Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     private Long id;
     private String name;
 
