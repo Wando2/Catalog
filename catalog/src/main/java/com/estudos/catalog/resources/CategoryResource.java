@@ -1,13 +1,13 @@
 package com.estudos.catalog.resources;
 
 
+import com.estudos.catalog.dto.CategoryDTO;
 import com.estudos.catalog.entities.Category;
 import com.estudos.catalog.services.CategoryService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +21,23 @@ public class CategoryResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
+    public ResponseEntity<List<CategoryDTO>> findAll() {
         var categories = service.findAll();
 
         return ResponseEntity.ok().body(categories);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+        var category = service.findById(id);
+        return ResponseEntity.ok().body(category);
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
+        dto = service.insert(dto);
+        URI uri = URI.create("/categories/" + dto.getId());
+        return ResponseEntity.created(uri).body(dto);
 
     }
 }
