@@ -2,14 +2,16 @@ package com.estudos.catalog.resources;
 
 
 import com.estudos.catalog.dto.CategoryDTO;
-import com.estudos.catalog.entities.Category;
 import com.estudos.catalog.services.CategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Pageable;
+
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/categories")
@@ -21,8 +23,8 @@ public class CategoryResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> findAll() {
-        var categories = service.findAll();
+    public ResponseEntity<Page<CategoryDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
+        var categories = service.findAll(pageable);
 
         return ResponseEntity.ok().body(categories);
     }
