@@ -1,5 +1,6 @@
 package com.estudos.catalog.entities;
 
+import com.estudos.catalog.dto.CategoryDTO;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -8,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_products")
-public class Products {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,10 +27,10 @@ public class Products {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    public Products() {
+    public Product() {
     }
 
-    public Products(Long id, String name, Double price, String description, String imgUrl) {
+    public Product(Long id, String name, Double price, String description, String imgUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -79,4 +80,7 @@ public class Products {
     }
 
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
 }
