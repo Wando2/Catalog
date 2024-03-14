@@ -51,7 +51,7 @@ public class ProductService {
             var catDto = categoryService.findById(categoryDTO.getId());
             entity.getCategories().add(new Category(catDto.getId(), catDto.getName()));
         });
-        
+
     }
 
     @Transactional
